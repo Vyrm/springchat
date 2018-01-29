@@ -9,16 +9,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {AppContextTest.class})
 public class UserHandlerTest {
+    private User testUser;
 
     @Mock
     private UserDao userDao;
@@ -26,18 +24,20 @@ public class UserHandlerTest {
     @InjectMocks
     private UserHandler userHandler;
 
-    public User initData() {
-        User user = new User();
-        user.setPassword("test");
-        user.setNickname("test");
-        return user;
+    @Before
+    public void initData() {
+        testUser = new User();
+        testUser.setPassword("test");
+        testUser.setNickname("test");
     }
 
     @Test
     public void testAddUser() {
-        User testUser = initData();
-       /* User userFromDB = userHandler.addUser(testUser.getNickname(), testUser.getPassword());
-        Assert.assertTrue(testUser.getNickname().equals(userFromDB.getNickname()));
-        Assert.assertTrue(testUser.getPassword().equals(userFromDB.getPassword()));*/
+        Mockito.when(userDao.save(testUser)).thenReturn(testUser);
+
+        User user = userHandler.addUser(testUser.getNickname(), testUser.getPassword());
+
+        Assert.assertTrue(testUser.getNickname().equals(user.getNickname()));
+        Assert.assertTrue(testUser.getPassword().equals(user.getPassword()));
     }
 }

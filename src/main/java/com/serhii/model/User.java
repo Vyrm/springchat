@@ -59,4 +59,12 @@ public class User {
         return nickname != null ? nickname.hashCode() : 0;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
