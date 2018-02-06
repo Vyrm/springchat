@@ -12,15 +12,13 @@ public class UserHandler {
 
     public User addUser(String nickname, String password) {
         User user = new User(nickname, password);
-        return userDao.save(user);
+        userDao.save(user);
+        return user;
     }
 
     public User getUser(String nickname) {
         return userDao.findByNickname(nickname);
     }
 
-    public User delete(User user){
-        return userDao.deleteUserByNickname(user.getNickname());
-    }
 
 }

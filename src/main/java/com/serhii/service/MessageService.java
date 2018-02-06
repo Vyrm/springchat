@@ -46,7 +46,7 @@ public class MessageService {
         printWriterHandler.getMap().remove(excludedUser.getNickname());
     }
 
-    public void lastMessages(User user) {
+    public int lastMessages(User user) {
         ConcurrentLinkedDeque<String> temp = new ConcurrentLinkedDeque<>(messageHandler.getQueue());
         for (int i = 0; i < 10; i++) {
             String poll;
@@ -56,6 +56,7 @@ public class MessageService {
                 i = 10;
             }
         }
+        return temp.size();
     }
 
     private void addMessageToMessageHandler(String message, User user) {
