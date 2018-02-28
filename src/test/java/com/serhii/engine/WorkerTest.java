@@ -5,7 +5,6 @@ import com.serhii.model.User;
 import com.serhii.service.AuthorizationService;
 import com.serhii.service.MessageService;
 import com.serhii.util.MockSocket;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
