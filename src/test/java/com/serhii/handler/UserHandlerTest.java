@@ -30,7 +30,7 @@ public class UserHandlerTest {
 
     @Test
     public void testAddUser() {
-        User user = userHandler.addUser(testUser.getNickname(), testUser.getPassword());
+        User user = userHandler.addUser(testUser);
         Assert.assertTrue(testUser.getNickname().equals(user.getNickname()));
         Assert.assertTrue(testUser.getPassword().equals(user.getPassword()));
     }

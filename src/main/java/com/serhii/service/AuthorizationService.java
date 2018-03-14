@@ -8,17 +8,17 @@ import com.serhii.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@Service
 public class AuthorizationService {
-    private static final Logger logger = LoggerFactory.getLogger(Worker.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Worker.class);
+
     @Autowired
     private UserHandler userHandler;
+
     @Autowired
     private PrintWriterHandler printWriterHandler;
 
@@ -45,13 +45,12 @@ public class AuthorizationService {
         String password = bufferedReader.readLine();
         printWriter.println("Confirm password");
         String confirm = bufferedReader.readLine();
+
         if (password.equals(confirm)) {
-            User user = new User(nickname, password);
-            userHandler.addUser(nickname, password);
+            LOGGER.info(nickname + " is connected");
             printWriter.println("Registration success");
-            logger.info(nickname + " is connected");
             printWriterHandler.getMap().put(nickname, printWriter);
-            return user;
+            return userHandler.addUser(new User(nickname, password));
         } else {
             printWriter.println("Registration failed, please try again");
             return null;
@@ -66,7 +65,7 @@ public class AuthorizationService {
             user = userHandler.getUser(nickname);
             if (user != null && user.getPassword().equals(bufferedReader.readLine())) {
                 printWriter.println("Login success");
-                logger.info(nickname + " is connected");
+                LOGGER.info(nickname + " is connected");
                 printWriterHandler.getMap().put(nickname, printWriter);
             } else {
                 printWriter.println("Login failed, please try again");

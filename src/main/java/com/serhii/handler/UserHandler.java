@@ -10,15 +10,12 @@ public class UserHandler {
     @Autowired
     private UserDao userDao;
 
-    public User addUser(String nickname, String password) {
-        User user = new User(nickname, password);
-        userDao.save(user);
-        return user;
+    public User addUser(User user) {
+        return userDao.save(user);
     }
 
     public User getUser(String nickname) {
         return userDao.findByNickname(nickname);
     }
-
 
 }
