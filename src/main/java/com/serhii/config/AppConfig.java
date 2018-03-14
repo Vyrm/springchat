@@ -32,7 +32,6 @@ public class AppConfig {
     }
 
     @Bean
-    @Value("${chat.server.port:8080}")
     public ServerSocket serverSocket() throws IOException {
         return new ServerSocket(chatServerPort);
     }
